@@ -1,0 +1,17 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="fill_parent" android:layout_width="fill_parent"
+    android:orientation="vertical">
+    <fragment  android:id="@+id/fragment"
+        android:name="com.gs.bruce.androidtraining.MainActivityFragment"
+        tools:layout="@layout/fragment_main" android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="0dp" />
+    <fragment  android:id="@+id/fragment2"
+        android:name="com.gs.bruce.androidtraining.ReadArticle"
+        tools:layout="@layout/fragment_read_article" android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp" />
+</LinearLayout>
+
