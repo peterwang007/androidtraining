@@ -1,5 +1,6 @@
 package com.gs.bruce.androidtraining;
 
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +21,38 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i("Liferecycle", "---Application created------");
+
+        Button btnFirst = (Button) findViewById(R.id.btn_first);
+        Button btnSecond = (Button) findViewById(R.id.btn_second);
+        btnFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(1);
+            }
+        });
+        btnSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(2);
+            }
+        });
+
+    }
+    public void loadFragment(int order){
+        if(order==1) {
+            MainActivityFragment firstFragement = new MainActivityFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, firstFragement);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+        else{
+            ReadArticle secFragement = new ReadArticle();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, secFragement);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 
     @Override

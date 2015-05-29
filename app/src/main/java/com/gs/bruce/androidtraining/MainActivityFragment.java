@@ -11,13 +11,20 @@ import android.view.ViewGroup;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
-
+    private View view;
     public MainActivityFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //return inflater.inflate(R.layout.fragment_main, container, false);
+
+//        if (view == null) {
+//            view =inflater.inflate(R.layout.fragment_main, container, false);
+//        }
+        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 }
