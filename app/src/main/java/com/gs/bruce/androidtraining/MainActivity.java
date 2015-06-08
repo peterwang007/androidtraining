@@ -1,5 +1,7 @@
 package com.gs.bruce.androidtraining;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements ReadArticle.OnHeadlineSelectedListener  {
 
     public final static   String EDIT_MESSAGE="com.gs.bruce.main.sendmessage";
     @Override
@@ -103,7 +105,6 @@ public class MainActivity extends AppCompatActivity  {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -133,4 +134,8 @@ public class MainActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 
+    @Override
+    public void onArticleSelected(int position) {
+
+    }
 }
