@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
 
 
 public class ReadArticle extends Fragment {
@@ -34,17 +37,6 @@ public class ReadArticle extends Fragment {
         super.onAttach(activity);
         try{
             mCallback= (OnHeadlineSelectedListener)activity;
-            Button btnSave = (Button)activity.findViewById(R.id.btnSaveData);
-            btnSave.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Context context = activity;
-                    SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor= sharedPref.edit();
-                    editor.putString(getString(R.string.saved_high_score),"Haaaaaaaaaaaaa");
-                    editor.commit();
-                }
-            });
         }
         catch (ClassCastException ex){
             throw new ClassCastException(activity.toString() +" must implement the OnHeadlineSelectedListener interface.");
@@ -55,11 +47,30 @@ public class ReadArticle extends Fragment {
     public void onStart() {
         super.onStart();
         Log.i("FegmentLiferecycle", "---Fegment start------");
+
+        Button btn = (Button) getActivity().findViewById(R.id.btnSaveData);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getActivity();
+                SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getString(R.string.saved_high_score), "Haaaaaaaaaaaaa" + new Random().nextDouble());
+                editor.commit();
+
+                ShowText();
+            }
+        });
+        this.ShowText();
+    }
+
+    private void  ShowText(){
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String highScore = sharedPref.getString(getString(R.string.saved_high_score), "You");
-        Toast toast = Toast.makeText(context,highScore,Toast.LENGTH_SHORT);
-        toast.show();
+
+        TextView view = (TextView) getActivity().findViewById(R.id.txtData);
+        view.setText(highScore);
     }
 
     @Override
